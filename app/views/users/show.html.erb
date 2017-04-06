@@ -1,0 +1,40 @@
+<h1>Show User</h1>
+
+<br>
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+
+<h2>Your Friends</h2>
+<ul>
+  <% for friendship in @user.friendships %>
+  <li>
+     <%= h link_to "#{friendship.friend.name}", user_path(friendship.friend) %>
+    (<%= link_to "unfriend", friendship, :method => :delete %>)
+  </li>
+  <% end %>
+</ul>
+
+
+<h2>Users Who Have Befriended You</h2>
+<ul>
+  <% for befrinded in @user.inverse_friends %>
+  <li><%= h link_to "#{befrinded.name}", user_path(befrinded) %></li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to "Find Friends", users_path %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

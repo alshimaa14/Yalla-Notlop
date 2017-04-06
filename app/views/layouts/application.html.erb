@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YalaNotlob</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css">
+      body {
+        margin-top: 100px;
+      }
+      .b {
+        /*background-color: #292b2c !important;*/
+        margin-top: 10px;
+      }
+      .form-control {
+        margin-bottom: 7px;
+        margin-top: 3px;
+        margin-left: 5px;
+      }
+      .new_link {
+        float:right;
+        margin-right: 20px;
+        margin-bottom: 30px; 
+        margin-top: -30px;
+      }
+      .h {
+        margin: 10px;
+        min-height: 300px;
+        padding: 30px;
+      }
+      .h h2 {
+        margin-bottom: 20px;
+      }
+      .link {
+         background:none!important;
+         color:#0275d8;
+         border:none; 
+         padding:0!important;
+         font: inherit;
+         /*border is optional*/
+         /*border-bottom:1px solid #444; */
+         cursor: pointer;
+      }
+      #new_member {
+        display: inline-block;
+      }
+      .addFriend {
+        float: right;
+        margin-top: -50px !important;
+        /*margin-right: 100px;*/
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <%= render 'layouts/header' %>
+
+    
+    <div class="container">
+
+      <% if notice %>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+      <p id="alert" class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+
+    </div><!-- /.container -->
+    
+  </body>
+</html>

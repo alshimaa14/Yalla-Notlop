@@ -1,0 +1,57 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<a class="navbar-brand" href="https://serene-temple-30674.herokuapp.com/">YalaNotlob</a>
+
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<%= link_to 'Home', users_path, class: "nav-link" %>
+			</li>
+			<li class="nav-item">
+				<% if user_signed_in? %>
+				<%= link_to 'Friends', user_friends_path(current_user), class: "nav-link" %>
+				<% else %>
+				  <a class="nav-link" href="#">Friends</a>
+				<% end %>
+			</li>
+			<li class="nav-item">
+				<% if user_signed_in? %>
+				<%= link_to 'Groups', user_groups_path(current_user), class: "nav-link" %>
+				<% else %>
+				  <a class="nav-link" href="#">Groups</a>
+				<% end %>
+			</li>
+			<li class="nav-item">
+				<% if user_signed_in? %>
+				<%= link_to 'Orders', user_orders_path(current_user), class: "nav-link" %>
+				<% else %>
+					<a class="nav-link" href="#">Orders</a>
+				<% end %>
+			</li>
+		</ul>
+	    <ul  class="navbar-nav">
+	    	<% if user_signed_in? %>
+	    	<li class="nav-item mr-auto">
+	    		<%= render "layouts/notification_center", notifications: @notifications %>
+	    	</li>
+	    	<% end %>
+	    	<li class="nav-item" style="letter-spacing: 2px;">
+	    		<% if user_signed_in? %>
+			      <%= link_to "Hello, #{current_user.name}!", user_path(current_user), class: "nav-link active" %>
+			    <% else %>
+			    	<%= link_to "Hello, stranger :)", new_user_registration_path, class: "nav-link" %>
+			    <% end %>
+			</li>
+	    	<li class="nav-item">
+	    		<% if user_signed_in? %>
+    			<%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
+    			<% else %>
+    				<%= link_to 'Login', new_user_session_path, method: :get, class: "nav-link active" %>
+    			<% end %>
+			</li>
+	    </ul>
+	</div>
+</nav>
+

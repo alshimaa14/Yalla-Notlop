@@ -1,0 +1,44 @@
+<%= form_for([@user,@order], html: { multipart: true }) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table>
+<tbody>
+<tr>
+  <td><%= f.label :meal %></td>
+  <td><%= select_tag('order[meal]', options_for_select([['Breakfast', 'Breakfast'], ['Lunch', 'Lunch'], ['Dinner', 'Dinner']]), {:class => "form-control"})  %>
+    
+  </td>
+</tr>
+<tr>
+  <td colspan="2">Write the restuarant name</td>
+</tr>
+<tr>
+  <td><%= f.label :resturant_name, 'From' %></td>
+  <td><%= f.text_field :resturant_name, :class=>'form-control' %></td>
+</tr>
+<tr>
+  <td><%= f.label :menu, 'Menu Image' %></td>
+  <td><%= f.file_field :menu %></td>
+</tr>
+
+</tbody>
+</table>
+<input type="hidden" name="order[user_id]" id="order_user_id" value="<%= current_user.id %>" />
+
+
+
+<%= f.submit :class => "btn btn-primary b"%>
+
+
+<% end %>
+<br>

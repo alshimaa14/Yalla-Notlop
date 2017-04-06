@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meal:</strong>
+  <%= @order.meal %>
+</p>
+
+<p>
+  <strong>Resturant name:</strong>
+  <%= @order.resturant_name %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @order.user.name %>
+</p>
+
+<p>
+	<strong>Menu:</strong>
+	<%=link_to image_tag(@order.menu.url(:large)), @order.menu.url(:original), :popup=>['original_image', 'height=700,width=900'] , target: :_blank %>
+</p>
+
+<%= link_to 'Edit', edit_user_order_path(@user, @order) %> |
+<%= link_to 'Back', user_orders_path %>

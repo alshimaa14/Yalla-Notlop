@@ -1,0 +1,46 @@
+<form action="https://serene-temple-30674.herokuapp.com/users/<%= current_user.id %>/orders/<%= params[:order_id] %>/order_friend_invitations" method="post" >
+
+  <% if @order_friend_invitation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order_friend_invitation.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order_friend_invitation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<input type="hidden" name="order[user_id]" id="order_user_id" value="<%= current_user.id %>" />
+
+
+
+<%= label_tag 'Choose Friends to invite: ' %>
+<div>
+    <table style="overflow: scroll; height: 200px" class="form-control">
+    <% current_user.friends.each_with_index do |friend, i| %>
+      <% if i%10 == 0 %>
+        <tr>
+      <%end%>
+      <td>
+          <%= check_box_tag('invited_friends[]', friend.id) %>
+          <%= label_tag(:invited_friends, friend.name) %>
+      <td>
+      <% if i+11%10 == 0 %>
+        </tr>
+      <%end%>
+    <% end %>
+    </table>
+    <!-- <p><a href="#" id="inviteFriends">Invite Friends</a> -->
+</div>
+
+
+
+
+<%= submit_tag 'Invite Friends', :class => "btn btn-primary b"%>
+
+
+</form>
+<br>

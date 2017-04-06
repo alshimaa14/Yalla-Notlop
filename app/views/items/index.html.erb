@@ -1,0 +1,55 @@
+
+
+<h1>Order details</h1>
+<br>
+
+
+<%= link_to 'New Item', new_user_order_item_path, :class => "new_link" %>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Unit Price</th>
+      <th>Comment</th>
+      <th>Order #</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.item_desc %></td>
+        <td><%= item.amount %></td>
+        <td><%= item.price %></td>
+        <td><%= item.comment %></td>
+        <td><%= item.order.id %></td>
+        <td><%= item.user.name %></td>
+        <td><%= link_to 'Show', [@user,@order,item] %></td>
+        <td><%= link_to 'Edit', edit_user_order_item_path(@user,@order,item) %></td>
+        <td><%= link_to 'Destroy', [@user,@order,item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="10"></td>
+    </tr>
+    <tr style="text-align: center;">
+        <% num_inv_friends = Order.find(params[:order_id]).order_friend_invitations.size %>
+        <td colspan="10"><a href="https://serene-temple-30674.herokuapp.com/users/<%= params[:user_id] %>/orders/<%= params[:order_id] %>/order_friend_invitations">>>>>> <%= num_inv_friends%> ~ friends invited, click to view <<<<<</a></td>
+      </tr>
+      <tr style="text-align: center;">
+        <% num_joined_friends = Order.find(params[:order_id]).order_friend_invitations.where("pending=?", false).size %>
+        <td colspan="10"><a href="https://serene-temple-30674.herokuapp.com/users/<%= params[:user_id] %>/orders/<%= params[:order_id] %>/order_friend_invitations/joined">>>>>> <%= num_joined_friends %> ~ friends joined , click to view <<<<<<</a></td>
+      </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back to All Orders', user_orders_path %>

@@ -1,0 +1,48 @@
+<%= form_for ([@user,@order,@item]) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+    <tbody>
+      <tr>
+        <td><%= f.label :item_desc %></td>
+        <td><%= f.text_field :item_desc, :class=>'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :amount %></td>
+        <td><%= f.number_field :amount, :class=>'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :price %></td>
+        <td><%= f.text_field :price, :class=>'form-control' %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :comment %></td>
+        <td><%= f.text_area :comment, :class=>'form-control' %></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= f.submit :class => "btn btn-primary b" %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="field">
+    <input type="hidden" name="item[order_id]" id="item_order_id" value="<%= params[:order_id] %>" />
+  </div>
+
+  <div class="field">
+    <input type="hidden" name="item[user_id]" id="item_user_id" value="<%= current_user.id %>" />
+  </div>
+
+
+<% end %>
+<br>

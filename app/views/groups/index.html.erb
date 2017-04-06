@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<br>
+
+
+<!-- <div id="continer" style="padding:20px; border:1px solid black">
+<div id="groupsBox" style="float:left; margin-right:50px">
+
+ -->  <h1>Groups</h1>
+
+ <%= link_to 'New Group', new_user_group_path(current_user), :class => "new_link" %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>group Name</th>
+        <th>Owner</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.name %></td>
+          <td><%= group.user.name %></td>
+          <td><%= link_to 'Show', user_group_path(group.user,group) %></td>
+          <% if group.user==current_user %>
+          <td><%= link_to 'Edit', edit_user_group_path(current_user,group) %></td>
+          <td><%= link_to 'Destroy', [current_user,group], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<!-- </div> -->

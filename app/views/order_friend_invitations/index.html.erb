@@ -1,0 +1,21 @@
+
+
+<h1>Friends Invited to Order # <%= params[:order_id] %></h1>
+
+
+
+
+<ul>
+  <% for invited_friend in @invited_friends %>
+  <li>
+    <%= h invited_friend.name %>
+    (<%=link_to 'uninvite', uninvite_user_order_order_friend_invitations_path(:invited_friend_id => invited_friend.id) %>) 
+  </li>
+  <% end %>
+</ul>
+
+
+<br>
+<!-- 
+<%= link_to 'Home', root_url, :class => "new_link" %>
+ -->

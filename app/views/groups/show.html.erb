@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+<div id="continer" style="padding:20px; border:1px solid black">
+<div id="groupsBox" style="float:left; margin-right:50px">
+
+
+
+</div>
+
+<!-- show members of this group  -->
+
+<h1>Members of "<%= @group.name %>"</h1>
+
+
+<p>
+  <strong>Group Owner:</strong>
+  <%= @group.user.name %>
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+    <% @group.members.each do |member| %>
+      <tr>
+        <td><%= member.user.name %></td>
+        <td>(<%= link_to 'Remove from group', user_group_member_path(@user,@group,member) , method: :delete, data: { confirm: 'Are you sure?' } %>)</td>
+      </tr>
+    <% end %>
+  <tbody>
+    
+  </tbody>
+</table>
+
+<br>
+
+<h2>Add Members</h2>
+  <% for friendship in current_user.friendships %>
+  <li>  
+  <%= h link_to "#{friendship.friend.name}", user_path(friendship.friend) %>
+    (<%= form_for([@user,@group,Member.new], :method => :post, :class => "linkForm") do |f| %>
+      <%= f.hidden_field :user_id, :value => "#{friendship.friend.id}" %>
+      <%= f.hidden_field :group_id, :value =>"#{@group.id}" %>
+      <%= f.submit 'add to group', :class => "link" %>
+    <% end %>)
+  </li>
+  <% end %>
+
+
+
+
+</div>
+<br>
+<br>
+<%= link_to 'Edit', edit_user_group_path(@user,@group) %> |
+<%= link_to 'Back', user_groups_path(@user) %>

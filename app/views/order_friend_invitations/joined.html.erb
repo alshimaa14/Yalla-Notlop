@@ -1,0 +1,20 @@
+
+
+<h1>Friends who joined Order # <%= params[:order_id] %></h1>
+
+
+
+
+<ul>
+  <% for joined_friend in @joined_friends %>
+  <li>
+    <%= h joined_friend.name %>
+  </li>
+  <% end %>
+</ul>
+
+
+<br>
+<!-- 
+<%= link_to 'Home', root_url, :class => "new_link" %>
+ -->
